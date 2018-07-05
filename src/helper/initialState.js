@@ -12,6 +12,13 @@ export const setInitialState = () => {
 	let date4 = date1.clone().add(45, 'minutes');
 	// console.log(date2);
 
+	// formatting dates
+	const formatString = 'YYYY-MM-DD HH:mm';
+	date1 = date1.format(formatString);
+	date2 = date2.format(formatString);
+	date3 = date3.format(formatString);
+	date4 = date4.format(formatString);
+
 	let conversationCricket = {
 		id: uuid(),
 		title: 'cricket',
@@ -24,7 +31,7 @@ export const setInitialState = () => {
 			},
 			{
 				name: 'Iniesta',
-				time: date2,
+				time: moment().format(formatString),
 				content: 'Same here'
 			},
 			{

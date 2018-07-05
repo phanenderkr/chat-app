@@ -1,15 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import Message from './Message';
+import moment from 'moment';
 
 const Conversation = props => {
 	if (!props.messages) {
 		return <div>Loading...</div>;
 	}
-	const messages = props.messages.sort((a, b) => a.time - b.time);
+	const messages = props.messages.sort(
+		(a, b) => moment(a.time) - moment(b.time)
+	);
 	return (
 		<ConversationWrapper>
-			{messages.map((message, index) => <Message message={message} key={index} />)}
+			{messages.map((message, index) => (
+				<Message message={message} key={index} />
+			))}
 		</ConversationWrapper>
 	);
 };

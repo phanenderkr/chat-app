@@ -9,7 +9,8 @@ export default props => {
 		<MessageWrapper>
 			<TopRow>
 				<Sender>{name}</Sender>
-				<span>{time.toDate().toUTCString()}</span>
+				{/* <span>{time.toDate().toUTCString()}</span> */}
+				<span>{time}</span>
 			</TopRow>
 
 			<Content>{content}</Content>

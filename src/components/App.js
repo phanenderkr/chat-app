@@ -24,7 +24,19 @@ class App extends Component {
 					activeConversationId: Object.keys(initialState)[0]
 				}));
 			}, 2000);
+		} else {
+			const stateLocalStorage = JSON.parse(localStorage.getItem('state'));
+			const { conversations, activeConversationId } = stateLocalStorage;
+			// console.log(conversations, activeConversationId);
+			this.setState(() => ({
+				conversations,
+				activeConversationId
+			}));
 		}
+	}
+
+	componentDidUpdate() {
+		localStorage.setItem('state', JSON.stringify(this.state));
 	}
 
 	getAllConvos = () => {
@@ -32,7 +44,7 @@ class App extends Component {
 			Object.keys(this.state.conversations).length !== 0 &&
 			this.state.conversations.constructor === Object
 		) {
-			return _.map(this.state.conversations, (val, key) => val);
+			return _.map(this.state.conversations, val => val);
 		}
 	};
 
@@ -58,7 +70,7 @@ class App extends Component {
 		const newMessage = {
 			name: 'You',
 			content: message,
-			time: moment()
+			time: moment().format('YYYY-MM-DD HH:mm')
 		};
 		const oldMessages = this.state.conversations[id].messages;
 		const conversations = this.state.conversations;
@@ -99,7 +111,9 @@ class App extends Component {
 
 					<ChatBox
 						createNewMessage={this.createNewMessage}
-						activeConversation={this.state.conversations[this.state.activeConversationId]}
+						activeConversation={
+							this.state.conversations[this.state.activeConversationId]
+						}
 					/>
 				</AppBody>
 			</EntireApp>
